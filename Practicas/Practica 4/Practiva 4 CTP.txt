@@ -1,0 +1,128 @@
+#include <iostream>
+#include <functional>
+#include <vector>
+
+int main() {
+
+  //apartado 1
+
+  std::vector<std::vector<float>> vv {{1,2,3}, {3,5}, {1,1,1,1}};
+  
+  std::function<float(std::vector<float>const &)> max = 
+  [] (std::vector<float> const & v) {
+
+    float max=-999999999999999;
+    for(auto elem:v){
+      if(elem>max){
+      max=elem;
+      }
+    }
+    return max;
+  };
+
+  std::function<float(std::vector<float>const &)> min = 
+  [] (std::vector<float> const & v) {
+
+    float min=999999999999999;
+    for(auto elem:v){
+      if(elem<min){
+      min=elem;
+      }
+    }
+    return min;
+  };
+
+  std::function<float(std::vector<float>const &)> mean = 
+  [] (std::vector<float> const & v) {
+
+    float sum=0;
+    for(auto elem:v){
+      sum+=elem;
+    }
+    return sum/v.size();
+  };
+
+  std::function<float(std::vector<float>const &)> summatory = 
+  [] (std::vector<float> const & v) {
+
+    float sum=0;
+    for(auto elem:v){
+      sum+=elem;
+    }
+    return sum;
+  };
+
+  std::function<float(std::vector<float>const &)> productory = 
+  [] (std::vector<float> const & v) {
+
+    float sum=1;
+    for(auto elem:v){
+      sum=sum*elem;
+    }
+    return sum;
+  };
+
+  std::function<float(std::function<float(std::vector<float>)>,std::function<float(std::vector<float>)>,std::vector<std::vector<float>>)> op = 
+  [] (std::function<float(std::vector<float>)> f1,std::function<float(std::vector<float>)> f2,std::vector<std::vector<float>> const & vv) {
+
+    
+    std::vector<float> g;
+    for(auto v:vv){
+      g.push_back(f2(v));
+    }
+    return f1(g);
+  };
+
+  //apartado 2
+
+  std::cout<<op(max,max,vv)<<"\n";
+  std::cout<<op(min,max,vv)<<"\n";
+  std::cout<<op(summatory,mean,vv)<<"\n";
+  std::cout<<op(mean,summatory,vv)<<"\n";
+  std::cout<<"---------------------------------------------------\n";
+
+  //apartado 3
+
+  std::vector<std::vector<float>> datosVectores;
+  std::vector<int> info;
+  int numV=0;
+  int cantN=0;
+  std::cout<<"Introduce numero vectores\n";
+  std::cin>>numV;
+
+  for(int i=0;i<numV;i++){
+    std::cout<<"Introduce numero datos V "<< i+1<<"\n";
+    std::cin>>cantN;
+    info.push_back(cantN);   
+  }
+  int cont=0;
+  
+  for (auto elem:info){    
+    std::vector<float>aux;
+    for(int j=0;j<elem;j++){
+      std::cout<<"Introduce numero "<< cont+1<<" "<< j+1<<"\n";
+      float n=0;
+      std::cin>>n;
+      aux.push_back(n);      
+    }
+    datosVectores.push_back(aux);
+    aux.clear();
+    cont++;
+  }
+
+  std::array<std::function<float(std::vector<float>const &)>,5>operar{max,min,mean,summatory,productory};
+
+  int f1=0;
+  int f2=0;
+  std::cout<<"elige 2 opciones"<<"\n";
+  std::cout<<"0.max"<<"\n";
+  std::cout<<"1.min"<<"\n";
+  std::cout<<"2.media"<<"\n";
+  std::cout<<"3.sumatorio"<<"\n";
+  std::cout<<"4.producto"<<"\n";
+  std::cin>>f1;
+  std::cin>>f2;
+  std::cout << op(operar.at(f1),operar.at(f2),datosVectores);
+
+
+}
