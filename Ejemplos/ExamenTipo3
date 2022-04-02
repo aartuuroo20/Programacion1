@@ -1,0 +1,58 @@
+#include <iostream>
+#include <functional>
+#include <vector>
+using namespace std;
+
+int main() {
+  vector<int> vec{1,2,3,4,5};
+
+  auto filter = [](std::function<bool(int)> f, vector<int> const & v) {
+          vector<int> result;
+          for (auto elem: v) {
+                  if(f(elem)) result.push_back(elem);
+          }
+          return result;
+  };
+
+  auto pares = [](int x) {
+          return x % 2 == 0;
+  };
+
+  auto primo = [](int x) {
+          if (x == 0 || x == 1 || x == 4) {
+                  return false;
+          }
+          for (int i{2}; i < x/2; i++) {
+                  if (x % i == 0) {
+                          return false;
+                  }
+          }
+          return true;
+  };
+
+  int suma{0};
+  for (auto elem: vec) {
+          suma += elem;
+  }
+  int media = suma / vec.size();
+
+  auto mayormedia = [=](int x) {
+          return x > media;
+  };
+
+  auto mostrar = [](int x) {
+          std::cout << x << " ";
+  };
+
+  auto forEach = [](function<void(int)> f, vector<int> const & v) {
+          for (auto elem: v) f(elem);
+  };
+
+  auto mispares = filter(pares, vec);
+  auto misprimos = filter(primo, vec);
+  auto mismayores = filter(mayormedia, vec);
+
+  forEach(mostrar, mispares); cout << "\n";
+  forEach(mostrar, misprimos); cout << "\n";
+  forEach(mostrar, mismayores); cout << "\n";
+}

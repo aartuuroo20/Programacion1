@@ -1,0 +1,18 @@
+#include <iostream>
+#include <functional>
+#include <vector>
+using namespace std;
+
+int main() {
+
+  auto mostrar =[](float x){
+    cout << x << "\n";
+  };
+
+  auto forEach = [](function<void(float)> g, vector<float> const & v){  //Para cada elemento del vector ejecuta esta funcion
+    for(auto elem: v) g(elem);
+  };
+
+  vector<float> miVector{1,2,3,3,4,5,5};
+  forEach(mostrar, miVector);
+}

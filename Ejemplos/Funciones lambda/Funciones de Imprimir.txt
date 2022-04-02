@@ -1,0 +1,8 @@
+void print(std::vector<int> v){
+    for(auto elem:v) std::cout << elem << "-";
+    std::cout << "\n";
+}
+
+function<void(int)> imprimir = [] (int a){
+    cout << a;
+  };

@@ -1,0 +1,18 @@
+#include <iostream>
+#include <array>
+using namespace std;
+
+int contar(string const & t, char a){
+  int contador{0};
+  for(auto elem: t){
+    if(elem !=a) contador++;
+  }
+  return contador;
+}
+
+int main() {
+  
+  string frase{"mi mono amelio y yo"};
+  cout << contar(frase, 'c');
+  return 0;
+}

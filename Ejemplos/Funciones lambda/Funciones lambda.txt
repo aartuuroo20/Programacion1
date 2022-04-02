@@ -1,0 +1,58 @@
+En las funciones lambda se declaran en el main al ser una variable  donde coge una funcion, indicando lo que devuelve y lo que toma (tipo).
+
+Se declara 
+
+function <int(int, int)> miFuncion = [](int a, int b){
+}
+
+  auto forEach = [](std::function<void(int)> f, std::vector<int> const & v) {
+          for (auto elem: v) f(elem);
+  };
+  
+  void forEach (vector<int> const & v1, function<void(int)> const & op) {
+    for(auto elem: v1){
+        op(elem);
+    }
+};
+
+auto mostrar = [](int x){
+    cout << x << "-";
+};
+
+
+
+std::vector<int> filter(std::vector<int> const & vec, std::function<bool (int)> const & op){
+    std::vector<int> result;
+    for(auto elem:vec){
+        if(op(elem)) result.push_back(elem);
+    }
+
+    return result;
+}
+//Otro tipo de funcio  filter
+std::vector<int> filter(std::vector<int> const & vec, std::function<int (int, int)> const & op){
+    std::vector<int> result;
+    for(int i=0; i<vec.size(); i++){
+        if(op(vec.at(i), i)) result.push_back(vec.at(i));
+    }
+
+    return result;
+}
+
+  auto transform = [](vector <int> const & v, function<int(int)>g){ //a cada elemeto del vector le aplica la transformacion g
+    vector<int> result;
+    for(auto elem: v){
+      result.push_back(g(elem));
+    }
+    return result;
+
+  };
+  
+  std::vector<int> map(std::vector<int> const & v, std::function<int (int)> const & op){
+    std::vector<int> result;
+    for(auto elem: v){
+        result.push_back(op(elem));
+    }
+
+    return result;
+}

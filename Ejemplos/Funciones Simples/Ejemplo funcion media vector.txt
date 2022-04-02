@@ -1,0 +1,16 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+float media(vector<float> const & data){
+  float media{0};
+  for(auto elem: data){
+   media = media + elem;
+  }
+  return media / data.size();
+}
+
+int main() {
+  
+  
+}

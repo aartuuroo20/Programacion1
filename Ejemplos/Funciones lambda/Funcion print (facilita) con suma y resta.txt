@@ -1,0 +1,27 @@
+#include <iostream>
+#include <functional>
+using namespace std;
+
+int main(){
+
+   function<float(float, float)> resta= [] (float a, float b){
+      
+    return a - b;
+  };
+
+  function<float(float, float)> suma = [] (float a, float b){
+      
+    return a + b;
+  };
+
+  function<void(function<float (float,float)> , float, float)> print = [] (function<float(float,float)> f, float a, float b){
+    cout << f(a,b);
+      
+    
+  };
+  
+  print(suma, 3,4);
+  print(resta,3,4);
+  return 0;
+  
+}

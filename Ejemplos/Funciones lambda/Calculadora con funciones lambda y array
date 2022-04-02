@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+#include <functional>
+#include <array>
+
+
+
+int main() {
+    function<float(float, float)> suma = [](float a, float b){
+        return a+b;
+    };
+
+    function<float(float, float)> resta = [](float a, float b){
+        return a-b;
+    };
+
+    function<float(float, float)> mult = [](float a, float b){
+        return a*b;
+    };
+
+    function<float(float, float)> div = [](float a, float b){
+        return a/b;
+    };
+
+    function<void(function<float(float, float)> , float, float)> print = [](function<float(float, float)> f, float a, float b){
+        cout << f(a,b) << endl;
+    };
+
+    cout << "Introduce opcion: " << endl;
+    cout << "1. suma: " << endl;
+    cout << "2. resta: " << endl;
+    cout << "3. mult: " << endl;
+    cout << "4. div: " << endl;
+    int op; cin >> op;
+
+    cout << "Introduce 2 numeros: " << endl;
+    float n1,  n2; cin >> n1 >> n2;
+
+    cout << endl;
+
+    array<function<float (float, float)>, 4> operaciones{suma, resta, mult, div};
+
+    cout << operaciones.at(op)(n1,n2) << endl;
+
+    if(op == 1) cout << suma(n1, n2);
+    if(op == 2) cout << resta(n1, n2);
+    if(op == 3) cout << mult(n1, n2);
+    if(op == 4) cout << div(n1, n2);
+
+    cout << endl;
+
+
+}
+

@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+#include <array>
+#include <set>
+
+int main() {
+  array <int, 5> miArray{1,4,3,1,5};
+  set <int> miset;
+
+  for(auto elem: miArray){
+    miset.insert(elem);
+  }
+  for(auto elem: miset){
+    cout << elem;
+  }
+  
+}

@@ -1,0 +1,103 @@
+#include <iostream>
+#include <vector>
+#include <math.h>
+#include <set>
+using namespace std;
+
+float media(vector<int> const & v){
+    float suma=0;
+    for(auto elem: v){
+        suma = suma + elem;
+    }
+    return suma/v.size();
+}
+
+float stdvv(vector<int> const & v){
+    float m = media(v);
+    float suma=0;
+    for(auto elem: v){
+        suma = suma + (elem-m)*(elem-m);
+    }
+    suma = suma/v.size();
+    return sqrt(suma);
+}
+
+
+int main(){
+
+    srand(time(NULL));
+    cout << "Cuantos numeros desea generar: " << endl;
+    int numeros; cin >> numeros;
+
+    cout << "Entre que valores seran esos numeros, poniendo primero el tope mayor y luego el menor: " << endl;
+    int p; int s; cin >> p >> s;
+
+    vector<int> aleatorios;
+    for(int i=0; i<numeros; i++){
+        int aux = s + rand() % (p+1-s);
+        aleatorios.push_back(aux);
+    }
+
+    vector<int> aleatorio_ordenado;
+
+    set<int> ordenados;
+    for(auto elem: aleatorios){
+        ordenados.insert(elem);
+    }
+    for(auto elem: ordenados){
+        aleatorio_ordenado.push_back(elem);
+    }
+    for(auto elem: aleatorio_ordenado){
+        cout << elem << "-";
+    }
+
+    cout << endl;
+
+    cout << "1. Media" << endl;
+    cout << "2. Desviacion tipica" << endl;
+    cout << "3. Mediana" << endl;
+    cout << "4. Nuevo vector de numeros" << endl;
+    cout << "5. Salir" << endl;
+    cout << "Introduce opcion: ";
+    int opcion; cin >> opcion;
+
+    while(opcion != 5){
+        if(opcion == 1){
+            cout << "La media es: " << media(aleatorios) << endl;
+            break;
+        }else if(opcion == 2){
+            cout << "La desviacion tipica es: " << stdvv(aleatorios) << endl;
+            break;
+        }else if(opcion == 3){
+            float mediana;
+            int mitad = aleatorio_ordenado.size()/2;
+            if(aleatorio_ordenado.size() % 2 == 0){
+                mediana = (aleatorio_ordenado[mitad-1] + aleatorio_ordenado[mitad]) / 2;
+            }else{
+                mediana = aleatorio_ordenado.at(mitad);
+            }
+            cout << "La mediana es: " << mediana << endl;
+            break;
+        }else{
+            cout << "Cuantos numeros desea generar: " << endl;
+            int numeros; cin >> numeros;
+
+            cout << "Entre que valores seran esos numeros, poniendo primero el tope mayor y luego el menor: " << endl;
+            int p; int s; cin >> p >> s;
+
+            vector<int> aleatorios2;
+            for(int i=0; i<numeros; i++){
+                int aux = s + rand() % (p+1-s);
+                aleatorios2.push_back(aux);
+            }
+            cout << "El nuevo vector generado es; " << endl;
+            for(auto elem: aleatorios2){
+                cout << elem << "-";
+            }
+            cout << endl;
+            break;
+        }
+    }
+
+
+}

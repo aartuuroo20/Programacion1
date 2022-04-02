@@ -1,0 +1,35 @@
+#include <iostream>
+#include <functional>
+#include <vector>
+using namespace std;
+
+int main() {
+
+  auto doble = [](int x){
+    return 2*x;
+  };
+
+   auto triple = [](int x){
+    return 3*x;
+  };
+
+  auto transform = [](vector <int> const & v, function<int(int)>g){ //a cada elemeto del vector le aplica la transformacion g
+    vector<int> result;
+    for(auto elem: v){
+      result.push_back(g(elem));
+    }
+    return result;
+
+  };
+
+  auto forEach = [](vector<int> const & v, function<void(int)> g){
+    
+    for(auto elem: v) g(elem);
+  };
+
+  vector<int> miVector{1,2,3,4,5,5,6};
+  vector<int> eldoble = transform(miVector, doble);
+
+  
+
+}

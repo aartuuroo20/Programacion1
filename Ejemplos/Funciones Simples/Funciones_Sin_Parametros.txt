@@ -1,0 +1,16 @@
+#include <iostream>
+// Estructura de funciones = tipo_de_retorno nombre_funcion (parametros) {};
+
+// sin retorno y sin parametros
+void saludar () {
+  std::cout << "Hola a todos";
+  int numero = 2;
+}
+
+
+int main() {
+  saludar ();
+  
+}
+
+// La funcion void no devuelve nada

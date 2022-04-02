@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+#include <vector>
+#include <functional>
+
+void forEach(vector<int> v, function<void(int)> f){
+  for(auto elem: v) f(elem);
+  
+  
+  }
+
+int main() {
+  function<void(int)> imprimir = [] (int a){
+    cout << a;
+  };
+
+  vector<int> v{1,2,3,4,5,6,7,8,9};
+  
+  forEach(v,imprimir);
+  
+}
